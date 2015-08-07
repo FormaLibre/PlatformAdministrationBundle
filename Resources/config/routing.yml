@@ -1,0 +1,4 @@
+formalibre_platformadministration_controller:
+    resource: "@FormaLibrePlatformAdministrationBundle/Controller/PlatformAdministrationController.php"
+    type: annotation
+    prefix: /

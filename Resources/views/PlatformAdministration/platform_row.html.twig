@@ -1,0 +1,54 @@
+{% set data = platform.savedData %}
+<tr>
+    <th>
+        {{ platform.friendPlatform.name }}
+    </th>
+    <th>
+        {{ platform.friendPlatform.name }}
+    </th>
+    <th>
+        {{ data.data.users_all }}
+    </th>
+    <th>
+        {{ data.data.workspace_created }}
+    </th>
+    <th>
+        <button class="btn btn-primary" type="button" data-toggle="collapse"
+            data-target="#platform-{{ platform.id }}" aria-expanded="false" aria-controls="platform-{{ platform.id}}">
+        {{ 'expand'|trans({}, 'platform') }}
+        </button>
+    </th>
+    <th>
+        {{ platform.lastRefreshed|timeAgo() }}
+    </th>
+    <th>
+        <div class="btn-group">
+            <a class="btn refresh-platform-btn"
+                    data-platform-id="{{ platform.id() }}"
+                    href="{{ path('formalibre_platformadministration_refresh', {'platform': platform.id }) }}"
+            >
+                <i class="fa fa-refresh" data-platform-id="{{ platform.id() }}"></i>
+            </a>
+        </div>
+    </th>
+</tr>
+<tr class="collapse" id="platform-{{ platform.id}}">
+    <td colspan=7>
+        <div class="container">
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li> {{ 'support_email'|trans({}, 'platform') }}: {{ platform.savedData.data.support_email }}</li>
+                    <li> {{ 'storage_used'|trans({}, 'platform') }}: {{ platform.savedData.data.storage_used }}</li>
+                    <li> {{ 'users_enabled'|trans({}, 'platform') }}: {{ platform.savedData.data.users_enabled }}</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    {% for package in platform.savedData.packages %}
+                        <li> {{ package.name }}: {{ package.version }} </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </td>
+</tr>
